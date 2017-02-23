@@ -2,19 +2,19 @@ CXX = g++
 CXXFLAGS = -c -g -std=c++11 -Wall -W -Werror -pedantic
 LDFLAGS =
 
-PROG = csort
+PROG = target/csort
 
-$(PROG) : CensusSort.o CensusData.o CensusDataSorts.o
-	$(CXX) $(LDFLAGS) CensusSort.o CensusData.o CensusDataSorts.o -o $(PROG)
+$(PROG) : target/CensusSort.o target/CensusData.o target/CensusDataSorts.o
+	$(CXX) $(LDFLAGS) -c target/CensusSort.o target/CensusData.o target/CensusDataSorts.o -o $(PROG)
 
-CensusSort.o : CensusSort.cpp CensusData.h
-	$(CXX) $(CXXFLAGS) CensusSort.cpp
+target/CensusSort.o : src/CensusSort.cpp header/CensusData.h
+	$(CXX) $(CXXFLAGS) -c src/CensusSort.cpp
 
-CensusData.o : CensusData.cpp CensusData.h
-	$(CXX) $(CXXFLAGS) CensusData.cpp
+target/CensusData.o : src/CensusData.cpp header/CensusData.h
+	$(CXX) $(CXXFLAGS) -c src/CensusData.cpp
 
-CensusDataSorts.o : CensusDataSorts.cpp CensusData.h
-	$(CXX) $(CXXFLAGS) CensusDataSorts.cpp
+target/CensusDataSorts.o : src/CensusDataSorts.cpp header/CensusData.h
+	$(CXX) $(CXXFLAGS) -c src/CensusDataSorts.cpp
 
 clean :
 	rm -f core $(PROG) *.o
